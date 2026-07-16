@@ -1,0 +1,75 @@
+:root {
+  /* --- PIT WALL: neutral charcoal (grey, not blue-grey) --- */
+  --bg: #1b1d21;
+  --panel: #262a31;
+  --card: #313641;
+  --raised: #3a404b;
+  --border: #464c58;
+  --border-soft: #363b44;
+
+  /* --- text --- */
+  --text: #f5f5f5;
+  --text-2: #bfc5d2;
+  --text-3: #868d9a;
+
+  /* --- primary action = light neutral, NOT a colour --- */
+  --primary: #e9ebee;
+  --primary-hover: #ffffff;
+  --primary-ink: #1b1d21;
+  --focus: rgba(233, 235, 238, 0.30);
+
+  /* --- semantic colour ONLY (data, never decoration) --- */
+  --loss: #f0862e;
+  --loss-strong: #ff9a4d;
+  --gain: #4c9aff;
+  --ok: #40b84f;
+  --warn: #e5a93a;
+  --bad: #ea5b5b;
+
+  /* --- analysis plot inset (darker than panels) --- */
+  --plot-bg: #17191d;
+  --plot-panel: #1e2127;
+  --plot-grid: #2b2f37;
+
+  /* --- type --- */
+  --font-ui: "Inter Variable", "Inter", system-ui, -apple-system, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Consolas, monospace;
+
+  /* --- flat geometry --- */
+  --r-sm: 3px;
+  --r: 4px;
+  --r-lg: 6px;
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --ring: 0 0 0 3px var(--focus);
+
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html, body, #root { margin: 0; min-height: 100%; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-ui);
+  font-size: 15.5px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+h1, h2, h3, h4, p { margin: 0; }
+a { color: var(--gain); text-decoration: none; }
+a:hover { text-decoration: underline; }
+:focus-visible { outline: none; box-shadow: var(--ring); border-radius: var(--r-sm); }
+
+.num { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+
+/* --- type scale --- */
+.t-hero { font-size: clamp(30px, 3.6vw, 40px); font-weight: 680; letter-spacing: -0.02em; line-height: 1.1; color: var(--text); }
+.t-h1   { font-size: 24px; font-weight: 660; letter-spacing: -0.01em; line-height: 1.2; }
+.t-h2   { font-size: 19px; font-weight: 640; }
+.t-h3   { font-size: 16px; font-weight: 620; }
+.t-body { font-size: 15.5px; color: var(--text-2); }
+.t-sm   { font-size: 13.5px; color: var(--text-2); }
+.t-label { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-3); font-family: var(--font-mono); }
+.text-2 { color: var(--text-2); }
+.text-3 { color: var(--text-3); }

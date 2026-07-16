@@ -1,0 +1,51 @@
+/* ---------------------------------------------------------------------------
+   Print / export report — a plain, ink-friendly one-pager. Hidden on screen,
+   shown only when printing (browser's Print → Save as PDF is the "export").
+--------------------------------------------------------------------------- */
+
+.print-report { display: none; }
+
+.export-actions { display: flex; gap: 10px; margin-left: auto; }
+
+.pr-head { display: flex; justify-content: space-between; align-items: baseline; border-bottom: 2px solid #111; padding-bottom: 10px; margin-bottom: 16px; }
+.pr-title { font-size: 20px; font-weight: 700; }
+.pr-meta { font-size: 11px; color: #444; text-align: right; }
+
+.pr-section { margin-bottom: 20px; break-inside: avoid; }
+.pr-section__label { font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #555; margin-bottom: 8px; border-bottom: 1px solid #ccc; padding-bottom: 4px; }
+
+.pr-narrative { font-size: 12.5px; line-height: 1.6; max-width: 100%; }
+
+.pr-stats { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
+.pr-stat__label { font-size: 9px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: #666; }
+.pr-stat__value { font-size: 15px; font-weight: 700; margin-top: 3px; }
+.pr-stat__sub { font-size: 10px; color: #666; margin-top: 2px; }
+
+.pr-table { width: 100%; border-collapse: collapse; font-size: 11px; }
+.pr-table th { text-align: left; font-size: 9px; letter-spacing: 0.05em; text-transform: uppercase; color: #555; border-bottom: 1px solid #999; padding: 5px 8px; }
+.pr-table td { padding: 5px 8px; border-bottom: 1px solid #ddd; }
+.pr-table tr:nth-child(even) { background: #f7f7f7; }
+
+.pr-kv { display: flex; gap: 16px; flex-wrap: wrap; font-size: 11.5px; }
+.pr-kv div { display: flex; gap: 6px; }
+.pr-kv .k { color: #555; }
+.pr-kv .v { font-weight: 600; }
+
+.pr-list { margin: 0; padding-left: 18px; font-size: 11.5px; line-height: 1.7; }
+
+.pr-foot { margin-top: 24px; padding-top: 10px; border-top: 1px solid #ccc; font-size: 9.5px; color: #777; display: flex; justify-content: space-between; }
+
+@media print {
+  @page { margin: 16mm; }
+  html, body { background: #fff !important; }
+  .rail, .work__bar, .no-print { display: none !important; }
+  .app-shell { display: block !important; height: auto !important; }
+  .work, .work__body { padding: 0 !important; height: auto !important; overflow: visible !important; }
+  .page { max-width: none !important; }
+  .print-report {
+    display: block !important;
+    color: #111 !important;
+    font-family: var(--font-ui);
+    background: #fff !important;
+  }
+}

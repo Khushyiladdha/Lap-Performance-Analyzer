@@ -1,0 +1,14 @@
+.configure__intro { max-width: 640px; margin-top: 8px; }
+
+.cfg-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.cfg-grid--2 { grid-template-columns: repeat(2, 1fr); }
+
+.summary-line {
+  margin-top: 4px; padding: 13px 16px; border-radius: var(--r-sm);
+  background: var(--card); border: 1px solid var(--border); font-size: 14px; color: var(--text-2);
+}
+.summary-line b { color: var(--text); font-weight: 600; font-family: var(--font-mono); }
+
+@media (max-width: 760px) {
+  .cfg-grid, .cfg-grid--2 { grid-template-columns: 1fr; }
+}

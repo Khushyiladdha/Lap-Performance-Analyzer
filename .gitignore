@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.pyc
+*.egg-info/
+.pytest_cache/
+
+# Virtual env
+.venv/
+backend/.venv/
+
+# FastF1 cache (regenerated on demand)
+backend/data/fastf1_cache/
+
+# Node / frontend
+node_modules/
+dist/
+
+# Environment
+.env
+.env.*
+
+# Editor / OS
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Build
+*.tsbuildinfo
