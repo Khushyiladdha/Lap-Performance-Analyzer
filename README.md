@@ -6,6 +6,8 @@ Compare two laps and find out exactly **where** time was gained or lost, **why**
 it happened, and whether the **driver** or the **car** caused it — for Formula 1
 sessions or your own imported telemetry.
 
+**[Live demo →](https://lap-performance-analyzer.vercel.app/)**
+
 ---
 
 ## Highlights
@@ -23,6 +25,7 @@ sessions or your own imported telemetry.
 ## Table of contents
 
 - [Highlights](#highlights)
+- [Screenshots](#screenshots)
 - [What it does](#what-it-does)
 - [Architecture](#architecture)
 - [Key features](#key-features)
@@ -36,6 +39,29 @@ sessions or your own imported telemetry.
 - [Deployment](#deployment)
 - [Assumptions & limitations](#assumptions--limitations)
 - [License](#license)
+
+---
+
+## Screenshots
+
+**Corner-level breakdown, with the racing line coloured by time delta:**
+
+![Results overview — thermal track map, summary cards, top corners](docs/screenshots/results-overview.png)
+
+**Every corner's cause, confidence, and a rule-based corrective suggestion:**
+
+![Corner-by-corner breakdown with narrative and recommendation](docs/screenshots/results-corners.png)
+
+**Guided wizard — pick any season, Grand Prix, session and driver:**
+
+![Configure comparison — cascading season/event/session/driver pickers](docs/screenshots/configure.png)
+
+<details>
+<summary>Welcome screen</summary>
+
+![Welcome screen — entry points for Formula 1 and Formula Student analysis](docs/screenshots/welcome.png)
+
+</details>
 
 ---
 
@@ -249,7 +275,8 @@ considered done.
 ## Deployment
 
 - **Backend** — Railway (Docker), running the FastAPI app behind `uvicorn`.
-- **Frontend** — Vercel, with `VITE_API_URL` pointed at the deployed backend.
+- **Frontend** — Vercel, with `VITE_API_URL` pointed at the deployed backend:
+  **[lap-performance-analyzer.vercel.app](https://lap-performance-analyzer.vercel.app/)**
 
 ## Assumptions & limitations
 

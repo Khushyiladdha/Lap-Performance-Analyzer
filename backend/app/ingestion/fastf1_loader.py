@@ -34,6 +34,18 @@ def load_session(spec: SessionSpec):
     return session
 
 
+def load_session_metadata(spec: SessionSpec):
+    """Load a session's lap/driver metadata only, skipping per-sample car
+    telemetry. Used by the catalog dropdowns, which only ever read driver
+    names/teams and lap times — pulling full telemetry here (as the analysis
+    path does) turned a driver-list fetch into a 10-20s wait for no reason.
+    """
+    enable_cache()
+    session = fastf1.get_session(spec.year, spec.event, spec.session)
+    session.load(telemetry=False, laps=True, weather=False, messages=False)
+    return session
+
+
 def _lap_to_telemetry(lap, session_id: str) -> LapTelemetry:
     """Convert a single FastF1 lap row into our normalized schema.
 
@@ -97,6 +109,12 @@ def load_session_cached(year: int, event: str, session: str):
     return load_session(SessionSpec(year=year, event=event, session=session, driver="NA"))
 
 
+@lru_cache(maxsize=16)
+def load_session_metadata_cached(year: int, event: str, session: str):
+    """Process-level cache of the lightweight (no-telemetry) session load."""
+    return load_session_metadata(SessionSpec(year=year, event=event, session=session, driver="NA"))
+
+
 def load_lap_by_number(spec: SessionSpec, session, lap_number: int) -> LapTelemetry:
     """Load one specific lap by number for the spec's driver."""
     drv = session.laps[session.laps["Driver"] == spec.driver]
@@ -129,8 +147,8 @@ def list_events(year: int) -> list[dict]:
 
 
 def list_drivers(year: int, event: str, session: str) -> list[dict]:
-    """Drivers in a session, with full names (cached session load)."""
-    loaded = load_session_cached(year, event, session)
+    """Drivers in a session, with full names (cached, telemetry-free session load)."""
+    loaded = load_session_metadata_cached(year, event, session)
     drivers = []
     for num in loaded.drivers:
         d = loaded.get_driver(num)
@@ -147,7 +165,7 @@ def list_drivers(year: int, event: str, session: str) -> list[dict]:
 
 def list_laps(year: int, event: str, session: str, driver: str) -> list[dict]:
     """A driver's laps with times + which is fastest (for the plain-language picker)."""
-    loaded = load_session_cached(year, event, session)
+    loaded = load_session_metadata_cached(year, event, session)
     drv = loaded.laps[loaded.laps["Driver"] == driver]
     if len(drv) == 0:
         raise ValueError(f"no laps found for driver '{driver}' in {year} {event} {session}")
